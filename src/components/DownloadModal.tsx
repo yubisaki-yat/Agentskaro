@@ -16,13 +16,26 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [downloadStarted, setDownloadStarted] = useState(false);
 
+  // 📌 Set your .exe download URL below.
+  // Options: Hugging Face, Google Drive direct link, or your own CDN.
+  // Example: "https://huggingface.co/yubisaki/agentskaro-releases/resolve/main/AgentsKaro-Setup-v2.0.exe"
+  // Example: "https://drive.google.com/uc?export=download&id=YOUR_GOOGLE_DRIVE_FILE_ID"
+  const EXE_DOWNLOAD_URL = process.env.NEXT_PUBLIC_EXE_URL || null;
+
   const handleDownload = () => {
     setDownloadStarted(true);
-    setTimeout(() => {
+    if (EXE_DOWNLOAD_URL) {
+      // Trigger direct download — browser shows native "Save As" dialog
       const link = document.createElement("a");
-      link.href = "#";
+      link.href = EXE_DOWNLOAD_URL;
       link.setAttribute("download", "AgentsKaro-Setup-v2.0.exe");
-    }, 800);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } else {
+      // Fallback: Scroll to notify (Coming Soon — until .exe URL is configured)
+      console.log("Download URL not configured yet. Set NEXT_PUBLIC_EXE_URL in env vars.");
+    }
   };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
