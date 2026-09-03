@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #00f2fe;
+    --primary-glow: rgba(0, 242, 254, 0.4);
+    --secondary: #4facfe;
+    --accent: #ff8a00;
+    --accent-glow: rgba(255, 138, 0, 0.4);
+    
+    /* Default Dark Theme */
+    --bg-page: #05070e;
+    --bg-surface: #0a0e1c;
+    --bg-surface-elevated: #0f152a;
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
+    --text-subtle: #94a3b8;
+    --card-bg: rgba(14, 20, 36, 0.78);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --nav-bg: rgba(5, 7, 14, 0.88);
+    --mesh-dot: rgba(255, 255, 255, 0.05);
+    --terminal-bg: #030509;
+    --badge-bg: rgba(255, 255, 255, 0.06);
+    --footer-bg: #070a13;
+  }
+
+  html.light {
+    --bg-page: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #f1f5f9;
+    --text-main: #020617; /* Deep pitch slate for headlines */
+    --text-muted: #1e293b; /* High-contrast slate-800 for body text */
+    --text-subtle: #475569; /* Slate-600 for subtitles */
+    --card-bg: #ffffff;
+    --card-border: rgba(15, 23, 42, 0.12);
+    --nav-bg: rgba(248, 250, 252, 0.92);
+    --mesh-dot: rgba(15, 23, 42, 0.06);
+    --terminal-bg: #070a12;
+    --badge-bg: rgba(15, 23, 42, 0.05);
+    --footer-bg: #070a13;
+  }
+
+  body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Global typography contrast guarantees */
+  html.light h1,
+  html.light h2,
+  html.light h3,
+  html.light h4,
+  html.light h5,
+  html.light h6 {
+    color: var(--text-main);
+  }
+
+  html.light p {
+    color: var(--text-muted);
+  }
+
+  html.dark h1,
+  html.dark h2,
+  html.dark h3,
+  html.dark h4,
+  html.dark h5,
+  html.dark h6 {
+    color: var(--text-main);
+  }
+
+  html.dark p {
+    color: var(--text-muted);
+  }
+}
+
+/* Glassmorphism base */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
+}
+
+html.light .glass-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+}
+
+.glass-card-hover:hover {
+  border-color: rgba(0, 242, 254, 0.45);
+  box-shadow: 0 12px 35px 0 rgba(0, 242, 254, 0.12);
+  transform: translateY(-2px);
+}
+
+html.light .glass-card-hover:hover {
+  border-color: rgba(0, 180, 216, 0.5);
+  box-shadow: 0 16px 35px -6px rgba(0, 180, 216, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Glow effects */
+.glow-button {
+  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+  transition: all 0.25s ease;
+}
+
+.glow-button:hover {
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.75), 0 0 50px rgba(79, 172, 254, 0.35);
+  transform: translateY(-2px);
+}
+
+.glow-button-accent {
+  background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%);
+  box-shadow: 0 0 25px rgba(255, 138, 0, 0.4);
+  transition: all 0.25s ease;
+}
+
+.glow-text-cyan {
+  text-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+}
+
+html.light .glow-text-cyan {
+  text-shadow: 0 0 15px rgba(0, 180, 216, 0.25);
+}
+
+/* Background mesh dot grid */
+.bg-mesh-grid {
+  background-image: radial-gradient(var(--mesh-dot) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+}
+
+/* Animated Shimmer for Badges */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.badge-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 2.8s infinite;
+}
+
+/* Custom terminal scrollbar */
+.terminal-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.terminal-scroll::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+.terminal-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 242, 254, 0.4);
+}

@@ -1,0 +1,15 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+Allow: /recommendations
+Allow: /settings
+Allow: /integrations
+Allow: /company-crawler
+Allow: /bot
+Allow: /resume-vault
+
+# Sitemaps
+Sitemap: https://agentskaro.co.in/sitemap.xml
+
+# Crawl-delay for polite scraping
+Crawl-delay: 1
