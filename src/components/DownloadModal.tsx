@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Download, CheckCircle2, Shield, Laptop, Sparkles, Mail, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { X, Download, CheckCircle2, Shield, ShieldCheck, Laptop, Sparkles, Mail, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 
 interface DownloadModalProps {
   isOpen: boolean;

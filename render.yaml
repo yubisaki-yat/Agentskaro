@@ -18,4 +18,6 @@ services:
         sync: false
       - key: SMTP_PASS
         sync: false
+      - key: NEXT_PUBLIC_EXE_URL
+        sync: false
     healthCheckPath: /
