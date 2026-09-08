@@ -33,9 +33,10 @@ export async function POST(req: NextRequest) {
       await sendWelcomeEmail(email.trim());
       markEmailSent(email.trim());
       emailSent = true;
-    } catch (err: any) {
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Email dispatch failed";
       console.error("Failed to send welcome email:", err);
-      emailError = err?.message || "Email dispatch failed";
+      emailError = message;
     }
 
     return NextResponse.json({
@@ -51,10 +52,11 @@ export async function POST(req: NextRequest) {
         subscribedAt: subscriber.subscribedAt,
       },
     });
-  } catch (error: any) {
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Internal server error";
     console.error("API /api/subscribe error:", error);
     return NextResponse.json(
-      { error: "Internal server error", details: error?.message },
+      { error: "Internal server error", details: message },
       { status: 500 }
     );
   }

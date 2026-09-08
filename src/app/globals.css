@@ -2,175 +2,383 @@
 
 @layer base {
   :root {
-    --primary: #00f2fe;
-    --primary-glow: rgba(0, 242, 254, 0.4);
-    --secondary: #4facfe;
-    --accent: #ff8a00;
-    --accent-glow: rgba(255, 138, 0, 0.4);
-    
-    /* Default Dark Theme */
-    --bg-page: #05070e;
-    --bg-surface: #0a0e1c;
-    --bg-surface-elevated: #0f152a;
-    --text-main: #ffffff;
-    --text-muted: #cbd5e1;
-    --text-subtle: #94a3b8;
-    --card-bg: rgba(14, 20, 36, 0.78);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --nav-bg: rgba(5, 7, 14, 0.88);
-    --mesh-dot: rgba(255, 255, 255, 0.05);
-    --terminal-bg: #030509;
-    --badge-bg: rgba(255, 255, 255, 0.06);
-    --footer-bg: #070a13;
+    /* --- Primary Accent: Sky Blue --- */
+    --primary: #0ea5e9;
+    --primary-hover: #0284c7;
+    --primary-glow: rgba(14, 165, 233, 0.3);
+
+    /* --- Warm Accent: Orange --- */
+    --accent-warm: #f97316;
+    --accent-warm-hover: #ea6c0a;
+    --accent-warm-subtle: rgba(249, 115, 22, 0.12);
+
+    /* --- Secondary --- */
+    --secondary: #6366f1;
+
+    /* --- Dark Theme --- */
+    --bg-page: #060810;
+    --bg-surface: #0b0e1a;
+    --bg-surface-elevated: #10152a;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --bg-card-hover: rgba(255, 255, 255, 0.07);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-subtle: #64748b;
+    --border: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --nav-bg: rgba(6, 8, 16, 0.88);
+    --badge-bg: rgba(255, 255, 255, 0.05);
+    --footer-bg: #04060f;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2);
+    --card-shadow-hover: 0 4px 16px rgba(0,0,0,0.4), 0 8px 24px rgba(0,0,0,0.3);
   }
 
   html.light {
-    --bg-page: #f8fafc;
+    --bg-page: #f5f7fa;
     --bg-surface: #ffffff;
-    --bg-surface-elevated: #f1f5f9;
-    --text-main: #020617; /* Deep pitch slate for headlines */
-    --text-muted: #1e293b; /* High-contrast slate-800 for body text */
-    --text-subtle: #475569; /* Slate-600 for subtitles */
-    --card-bg: #ffffff;
-    --card-border: rgba(15, 23, 42, 0.12);
-    --nav-bg: rgba(248, 250, 252, 0.92);
-    --mesh-dot: rgba(15, 23, 42, 0.06);
-    --terminal-bg: #070a12;
-    --badge-bg: rgba(15, 23, 42, 0.05);
-    --footer-bg: #070a13;
+    --bg-surface-elevated: #eef2f7;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fafbfc;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --text-subtle: #94a3b8;
+    --border: rgba(15, 23, 42, 0.09);
+    --border-hover: rgba(15, 23, 42, 0.18);
+    --nav-bg: rgba(255, 255, 255, 0.92);
+    --badge-bg: rgba(15, 23, 42, 0.04);
+    --footer-bg: #0b0e1a;
+    --card-shadow: 0 1px 3px rgba(15,23,42,0.07), 0 4px 16px rgba(15,23,42,0.06);
+    --card-shadow-hover: 0 4px 16px rgba(15,23,42,0.10), 0 12px 32px rgba(15,23,42,0.08);
   }
+
+  html, body { height: 100%; }
 
   body {
     background-color: var(--bg-page);
     color: var(--text-main);
-    font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font-sans), 'Inter', system-ui, -apple-system, sans-serif;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.6;
   }
 
-  /* Global typography contrast guarantees */
-  html.light h1,
-  html.light h2,
-  html.light h3,
-  html.light h4,
-  html.light h5,
-  html.light h6 {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display), var(--font-sans), sans-serif;
     color: var(--text-main);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
   }
 
-  html.light p {
-    color: var(--text-muted);
-  }
-
-  html.dark h1,
-  html.dark h2,
-  html.dark h3,
-  html.dark h4,
-  html.dark h5,
-  html.dark h6 {
-    color: var(--text-main);
-  }
-
-  html.dark p {
-    color: var(--text-muted);
-  }
+  p { color: var(--text-muted); }
 }
 
-/* Glassmorphism base */
+/* ============================================================
+   CARDS & SURFACES
+   ============================================================ */
+
+.surface-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+html.light .surface-card {
+  background: #ffffff;
+}
+
+.surface-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.surface-card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* ============================================================
+   SECTION BACKGROUNDS
+   ============================================================ */
+
+.section-surface {
+  background-color: var(--bg-surface);
+}
+
+html.light .section-surface {
+  background-color: #ffffff;
+}
+
+.section-base {
+  background-color: var(--bg-page);
+}
+
+html.light .section-base {
+  background-color: #f5f7fa;
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 600;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::after { left: 150%; }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-hover);
+  color: var(--text-main);
+  background: var(--badge-bg);
+}
+
+/* Legacy alias */
+.glow-button {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+.glow-button:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITIES
+   ============================================================ */
+
+/* Section label — minimal, replaces overused cyan badge */
+.section-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 0.625rem;
+}
+
+/* Orange wavy underline for hero emphasis */
+.text-emphasis {
+  position: relative;
+  display: inline;
+}
+
+/* Gradient text — use sparingly (once per section max) */
+.gradient-text-sky {
+  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-warm {
+  background: linear-gradient(135deg, #fb923c 0%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================
+   BACKGROUND UTILITIES
+   ============================================================ */
+
+.bg-grid-dots {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+html.dark .bg-grid-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+
+.status-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+}
+
+html.dark .status-live {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.status-soon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+
+.terminal-scroll::-webkit-scrollbar { width: 5px; height: 5px; }
+.terminal-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+.terminal-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+.terminal-scroll::-webkit-scrollbar-thumb:hover { background: rgba(14,165,233,0.4); }
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+section[id] { scroll-margin-top: 72px; }
+
+::selection {
+  background: rgba(14, 165, 233, 0.18);
+  color: var(--text-main);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ============================================================
+   LEGACY GLASS CARD — kept for unmigrated components
+   ============================================================ */
+
 .glass-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid var(--card-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-  transition: all 0.25s ease;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--card-shadow);
+  transition: all 0.2s ease;
 }
 
 html.light .glass-card {
   background: #ffffff;
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.06), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
 }
 
 .glass-card-hover:hover {
-  border-color: rgba(0, 242, 254, 0.45);
-  box-shadow: 0 12px 35px 0 rgba(0, 242, 254, 0.12);
+  border-color: var(--border-hover);
   transform: translateY(-2px);
+  box-shadow: var(--card-shadow-hover);
 }
 
-html.light .glass-card-hover:hover {
-  border-color: rgba(0, 180, 216, 0.5);
-  box-shadow: 0 16px 35px -6px rgba(0, 180, 216, 0.15);
-  transform: translateY(-2px);
+.card-premium { position: relative; }
+
+/* ============================================================
+   LIGHT THEME — ENHANCED SURFACE DIFFERENTIATION
+   ============================================================ */
+
+html.light {
+  /* Make alternating sections visually distinct */
 }
 
-/* Glow effects */
-.glow-button {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
-  transition: all 0.25s ease;
+html.light .section-surface {
+  background-color: #ffffff;
 }
 
-.glow-button:hover {
-  box-shadow: 0 0 35px rgba(0, 242, 254, 0.75), 0 0 50px rgba(79, 172, 254, 0.35);
-  transform: translateY(-2px);
+html.light .section-base {
+  background-color: #f5f7fa;
 }
 
-.glow-button-accent {
-  background: linear-gradient(135deg, #ff8a00 0%, #e52e71 100%);
-  box-shadow: 0 0 25px rgba(255, 138, 0, 0.4);
-  transition: all 0.25s ease;
+/* Stronger card borders in light theme for better readability */
+html.light .surface-card {
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 1px 3px rgba(15,23,42,0.06), 0 4px 12px rgba(15,23,42,0.05);
 }
 
-.glow-text-cyan {
-  text-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+html.light .surface-card:hover {
+  border-color: rgba(15, 23, 42, 0.2);
+  box-shadow: 0 4px 16px rgba(15,23,42,0.1), 0 12px 32px rgba(15,23,42,0.07);
 }
 
-html.light .glow-text-cyan {
-  text-shadow: 0 0 15px rgba(0, 180, 216, 0.25);
+html.light .glass-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05), 0 4px 12px rgba(15,23,42,0.04);
 }
 
-/* Background mesh dot grid */
-.bg-mesh-grid {
-  background-image: radial-gradient(var(--mesh-dot) 1.5px, transparent 1.5px);
-  background-size: 32px 32px;
+/* Section label in light mode */
+html.light .section-label {
+  color: var(--primary);
 }
 
-/* Animated Shimmer for Badges */
-@keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-.badge-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.badge-shimmer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  animation: shimmer 2.8s infinite;
-}
-
-/* Custom terminal scrollbar */
-.terminal-scroll::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-.terminal-scroll::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-}
-.terminal-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
-}
-.terminal-scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 242, 254, 0.4);
+/* Nav shadow in light mode when scrolled */
+html.light header {
+  --nav-shadow: 0 1px 0 rgba(15,23,42,0.08);
 }

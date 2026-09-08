@@ -57,8 +57,9 @@ export async function POST(req: NextRequest) {
           `,
         });
         sentCount++;
-      } catch (err: any) {
-        errors.push(`${sub.email}: ${err?.message}`);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push(`${sub.email}: ${message}`);
       }
     }
 
@@ -68,8 +69,9 @@ export async function POST(req: NextRequest) {
       sentCount,
       errors: errors.length > 0 ? errors : undefined,
     });
-  } catch (error: any) {
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Internal server error";
     console.error("Broadcast error:", error);
-    return NextResponse.json({ error: error?.message }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

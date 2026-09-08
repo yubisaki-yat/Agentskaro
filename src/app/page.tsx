@@ -15,7 +15,8 @@ import DownloadModal from "@/components/DownloadModal";
 import WhatsAppFeature from "@/components/WhatsAppFeature";
 import SupportedPlatforms from "@/components/SupportedPlatforms";
 import SEOContentSection from "@/components/SEOContentSection";
-import { Download, Sparkles } from "lucide-react";
+import LiveSocialToast from "@/components/LiveSocialToast";
+import { Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Home() {
@@ -31,11 +32,25 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const openDownload = () => setIsDownloadOpen(true);
+  const openDownload = () => {
+    // Trigger direct .exe download instantly — zero gates, zero required fields
+    const exeUrl =
+      process.env.NEXT_PUBLIC_EXE_URL ||
+      "https://github.com/yubisaki-yat/Agentskaro/releases/download/v1.0.0/AgentsKaro-Setup.exe";
+    const link = document.createElement("a");
+    link.href = exeUrl;
+    link.setAttribute("download", "AgentsKaro-Setup-v2.0.exe");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    // Also display the setup instructions & Windows guide
+    setIsDownloadOpen(true);
+  };
   const closeDownload = () => setIsDownloadOpen(false);
 
   return (
-    <main className="min-h-screen bg-[var(--bg-page)] text-[var(--text-main)] relative bg-mesh-grid transition-colors duration-300">
+    <main id="main-content" className="min-h-screen bg-[var(--bg-page)] text-[var(--text-main)] relative bg-mesh-grid transition-colors duration-300">
       {/* Navigation with Theme Switcher */}
       <Navbar onOpenDownload={openDownload} />
 
@@ -78,6 +93,9 @@ export default function Home() {
       {/* Interactive Download / Early Access Modal */}
       <DownloadModal isOpen={isDownloadOpen} onClose={closeDownload} />
 
+      {/* Live Social Proof Activity Ticker */}
+      <LiveSocialToast />
+
       {/* Floating Bottom Quick-Download Bar (appears on scroll) */}
       <AnimatePresence>
         {showStickyCTA && (
@@ -86,25 +104,35 @@ export default function Home() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-xl glass-card rounded-2xl p-3 sm:p-3.5 border border-cyan-400/35 shadow-2xl flex items-center justify-between gap-4 bg-[var(--card-bg)]"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-lg surface-card rounded-2xl p-3 sm:p-4 flex items-center justify-between gap-4 shadow-2xl border border-[var(--border)]"
           >
-            <div className="flex items-center gap-3 pl-2">
-              <img
-                src="/logo.png"
-                alt="AgentsKaro"
-                className="w-8 h-8 rounded-lg object-cover shadow-sm border border-cyan-400/40 shrink-0"
-              />
+            <div className="flex items-center gap-3 pl-1">
+              <div className="relative">
+                <img
+                  src="/logo.png"
+                  alt="AgentsKaro"
+                  className="w-8 h-8 rounded-xl object-cover shadow-sm border border-[var(--border)] shrink-0"
+                />
+                <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                </span>
+              </div>
               <div className="hidden sm:block">
-                <div className="text-xs font-bold text-[var(--text-main)] leading-none">AgentsKaro Desktop v2.0</div>
-                <div className="text-[10px] text-[var(--text-muted)] mt-0.5">10 Free Applications Included</div>
+                <div className="text-xs font-bold text-[var(--text-main)] leading-none" style={{ fontFamily: "var(--font-display)" }}>
+                  AgentsKaro Desktop v2.0
+                </div>
+                <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">
+                  10 Free Applications Included
+                </div>
               </div>
             </div>
 
             <button
               onClick={openDownload}
-              className="glow-button px-5 py-2.5 rounded-xl font-black text-xs text-black flex items-center gap-2 cursor-pointer shrink-0 shadow-md active:scale-95 transition-all"
+              className="btn-primary px-5 py-2.5 rounded-xl font-semibold text-xs flex items-center gap-2 cursor-pointer shrink-0 active:scale-95 transition-all shadow-md"
             >
-              <Download size={14} className="stroke-[3]" />
+              <Download size={14} className="stroke-[2.5]" />
               <span>Download for Windows (.exe)</span>
             </button>
           </motion.div>

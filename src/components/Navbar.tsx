@@ -1,12 +1,20 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Download, Menu, X, Sun, Moon, Sparkles } from "lucide-react";
+import { Download, Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 
 interface NavbarProps {
   onOpenDownload: () => void;
 }
+
+const NAV_LINKS = [
+  { href: "#platforms", label: "Platforms" },
+  { href: "#features", label: "AI Agents" },
+  { href: "#whatsapp", label: "WhatsApp Agent", isLive: true, badge: "LIVE" },
+  { href: "#pricing", label: "Pricing" },
+  { href: "#faq", label: "FAQ" },
+];
 
 export default function Navbar({ onOpenDownload }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
@@ -14,9 +22,7 @@ export default function Navbar({ onOpenDownload }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -25,180 +31,132 @@ export default function Navbar({ onOpenDownload }: NavbarProps) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[var(--nav-bg)] backdrop-blur-2xl border-b border-[var(--card-border)] shadow-xl py-3"
+          ? "bg-[var(--nav-bg)] backdrop-blur-xl border-b border-[var(--border)] py-3"
           : "bg-transparent py-4 sm:py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Identity */}
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* Brand */}
         <a href="#" className="flex items-center gap-3 group shrink-0">
           <div className="relative">
             <img
               src="/logo.png"
-              alt="AgentsKaro Official Logo"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 group-hover:shadow-cyan-500/40 transition-all object-cover border border-cyan-400/30"
+              alt="AgentsKaro Logo"
+              className="w-10 h-10 rounded-2xl object-cover shadow-sm border border-[var(--border)] group-hover:scale-105 transition-all duration-200"
             />
-            <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[var(--bg-page)]" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-base sm:text-lg font-black tracking-tight text-[var(--text-main)] flex items-center gap-1.5 leading-none">
-              AgentsKaro
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            <span className="absolute -bottom-0.5 -right-0.5 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-[var(--bg-page)]"></span>
             </span>
-            <span className="text-[9px] font-bold text-[var(--text-subtle)] tracking-wider uppercase mt-0.5">
-              By Yubisaki
+          </div>
+          <div>
+            <div className="flex items-center gap-1.5">
+              <span
+                className="text-lg font-extrabold tracking-tight text-[var(--text-main)] leading-none"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                AgentsKaro
+              </span>
+              <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 leading-none">
+                v2.0
+              </span>
+            </div>
+            <span className="block text-[11px] text-[var(--text-subtle)] font-medium tracking-wide mt-0.5">
+              by Yubisaki
             </span>
           </div>
         </a>
 
-        {/* Clean, Centered & High-End Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 lg:gap-2 px-3 py-1.5 rounded-full bg-[var(--badge-bg)] border border-[var(--card-border)] backdrop-blur-md shadow-sm">
-          {/* Platforms (with 200+ badge) */}
-          <a
-            href="#platforms"
-            className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[var(--text-muted)] hover:text-cyan-400 hover:bg-white/5 transition-all flex items-center gap-1.5"
-          >
-            <span>Platforms</span>
-            <span className="px-1.5 py-0.2 rounded-full bg-cyan-500/20 text-cyan-400 text-[9px] font-black tracking-wider border border-cyan-400/30">
-              200+
-            </span>
-          </a>
-
-          {/* WhatsApp Bot */}
-          <a
-            href="#whatsapp"
-            className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[var(--text-muted)] hover:text-emerald-400 hover:bg-white/5 transition-all flex items-center gap-1.5"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-            <span>WhatsApp Bot</span>
-          </a>
-
-          {/* Features */}
-          <a
-            href="#features"
-            className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/5 transition-all"
-          >
-            Features
-          </a>
-
-          {/* Pricing */}
-          <a
-            href="#pricing"
-            className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/5 transition-all"
-          >
-            Pricing
-          </a>
-
-          {/* FAQ */}
-          <a
-            href="#faq"
-            className="px-3.5 py-1.5 rounded-full text-xs font-bold text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-white/5 transition-all"
-          >
-            FAQ
-          </a>
+        {/* Desktop Nav — flat links, no pill container */}
+        <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] transition-colors duration-150 relative group flex items-center gap-1.5"
+            >
+              {link.label}
+              {link.isLive && (
+                <span className="relative flex h-2 w-2" title="Live Feature">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+              )}
+              <span className="absolute -bottom-0.5 left-0 w-0 h-[1.5px] bg-[var(--primary)] group-hover:w-full transition-all duration-200" />
+            </a>
+          ))}
         </nav>
 
-        {/* Right Side Actions: Theme Switcher & Download CTA */}
-        <div className="flex items-center gap-3 shrink-0">
-          {/* Theme Toggle Button */}
+        {/* Right actions */}
+        <div className="flex items-center gap-2.5 shrink-0">
+          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2.5 rounded-xl bg-[var(--badge-bg)] border border-[var(--card-border)] text-[var(--text-muted)] hover:text-cyan-400 hover:border-cyan-400/40 transition-all cursor-pointer shadow-sm"
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            className="p-2 rounded-lg text-[var(--text-subtle)] hover:text-[var(--text-main)] hover:bg-[var(--badge-bg)] transition-all cursor-pointer"
           >
             {theme === "dark" ? (
-              <Sun size={16} className="text-amber-400 transition-transform rotate-0 hover:rotate-45" />
+              <Sun size={17} className="text-amber-400" />
             ) : (
-              <Moon size={16} className="text-blue-600 transition-transform -rotate-12 hover:rotate-0" />
+              <Moon size={17} className="text-slate-600" />
             )}
           </button>
 
-          {/* Primary Download Action Button */}
+          {/* Primary CTA */}
           <button
             onClick={onOpenDownload}
-            className="glow-button px-5 py-2.5 rounded-xl font-black text-xs text-black flex items-center gap-2 cursor-pointer shadow-lg active:scale-95 transition-all"
+            aria-label="Download AgentsKaro for Windows"
+            className="btn-primary hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-sm cursor-pointer active:scale-95 transition-all"
           >
-            <Download size={14} className="stroke-[2.5]" />
-            <span className="hidden sm:inline">Download (.exe)</span>
-            <span className="sm:hidden">Download</span>
+            <Download size={15} className="stroke-[2.5]" />
+            <span className="font-semibold">Download Free</span>
           </button>
 
-          {/* Mobile Menu Hamburger */}
+          {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2.5 rounded-xl bg-[var(--badge-bg)] border border-[var(--card-border)] text-[var(--text-main)] cursor-pointer"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            className="md:hidden p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--badge-bg)] transition-all cursor-pointer"
           >
-            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation Drawer */}
+      {/* Mobile drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[var(--bg-surface)] backdrop-blur-2xl border-b border-[var(--card-border)] px-6 py-6 space-y-4">
-          <nav className="flex flex-col gap-2 font-semibold text-sm text-[var(--text-main)]">
-            <a
-              href="#platforms"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between text-cyan-400 font-bold"
-            >
-              <span>Platforms & Portals</span>
-              <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-[10px] font-black">200+</span>
-            </a>
-            <a
-              href="#whatsapp"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 flex items-center justify-between text-emerald-400 font-bold"
-            >
-              <span>WhatsApp Bot Apply</span>
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-[10px] font-black">HOT</span>
-            </a>
-            <a
-              href="#features"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors"
-            >
-              Features
-            </a>
-            <a
-              href="#comparison"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors"
-            >
-              Comparison
-            </a>
-            <a
-              href="#calculator"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors"
-            >
-              ROI Calculator
-            </a>
-            <a
-              href="#pricing"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors"
-            >
-              Pricing
-            </a>
-            <a
-              href="#faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 px-3 rounded-xl hover:bg-white/5 hover:text-cyan-400 transition-colors"
-            >
-              FAQ
-            </a>
+        <div className="md:hidden bg-[var(--bg-surface)] border-b border-[var(--border)] px-5 py-5">
+          <nav className="flex flex-col gap-1">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="py-2.5 px-3 rounded-lg text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--badge-bg)] transition-all flex items-center justify-between"
+              >
+                <span>{link.label}</span>
+                {link.isLive && (
+                  <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[10px] font-bold">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                    </span>
+                    LIVE
+                  </span>
+                )}
+              </a>
+            ))}
           </nav>
-
           <button
             onClick={() => {
               setMobileMenuOpen(false);
               onOpenDownload();
             }}
-            className="w-full glow-button py-3 rounded-xl font-black text-sm text-black flex items-center justify-center gap-2 cursor-pointer shadow-lg"
+            className="mt-4 w-full btn-primary py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer"
           >
             <Download size={16} />
-            <span>Download for Windows (.exe)</span>
+            Download for Windows (.exe)
           </button>
         </div>
       )}

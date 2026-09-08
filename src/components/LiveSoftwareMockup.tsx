@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { Play, Pause, Terminal, CheckCircle2, Shield, Activity, Sparkles, RefreshCw, Cpu, Layers } from "lucide-react";
 
 const PLATFORMS = [
-  { id: "internshala", name: "Internshala Bot", badge: "Internships & Jobs", count: 18 },
-  { id: "naukri", name: "Naukri Scraper", badge: "Fast Apply", count: 24 },
-  { id: "indeed", name: "Indeed Bot", badge: "Global Roles", count: 12 },
+  { id: "internshala", name: "Internshala Agent", badge: "Internships & Jobs", count: 18 },
+  { id: "naukri", name: "Naukri Agent", badge: "Fast Apply", count: 24 },
+  { id: "indeed", name: "Indeed Agent", badge: "Global Roles", count: 12 },
 ];
 
 const INITIAL_LOGS = [
@@ -68,6 +68,7 @@ export default function LiveSoftwareMockup() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsRunning(!isRunning)}
+            aria-label={isRunning ? "Pause simulation" : "Resume simulation"}
             className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-gray-200 text-xs font-semibold transition-all cursor-pointer"
           >
             {isRunning ? (
@@ -82,9 +83,12 @@ export default function LiveSoftwareMockup() {
               </>
             )}
           </button>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
               {isRunning ? "Engine Active" : "Standby"}
             </span>
           </div>

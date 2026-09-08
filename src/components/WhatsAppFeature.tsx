@@ -12,26 +12,29 @@ export default function WhatsAppFeature({ onOpenDownload }: WhatsAppFeatureProps
   const [replied, setReplied] = useState(true);
 
   return (
-    <section id="whatsapp" className="py-24 relative overflow-hidden bg-gradient-to-b from-[var(--bg-page)] via-[var(--bg-surface-elevated)] to-[var(--bg-page)] border-t border-[var(--card-border)] transition-colors">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 -left-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Feature Pill */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
-            <MessageSquare size={13} className="fill-emerald-400/20" />
-            <span>Game-Changing WhatsApp Automation</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-black text-[var(--text-main)] tracking-tight leading-tight">
-            Apply to Top Jobs on WhatsApp <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
-              Just by Replying "YES"
+    <section id="whatsapp" className="py-24 relative overflow-hidden section-base border-t border-[var(--border)] transition-colors">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+        {/* Section header — left aligned, editorial */}
+        <div className="max-w-2xl mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-emerald-400 text-xs font-bold mb-3.5 shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
+            <span className="uppercase tracking-wider text-[10px]">Official Flagship</span>
+            <span>•</span>
+            <span>WhatsApp 1-Click AI Agent</span>
+          </div>
+          <h2
+            className="text-3xl sm:text-5xl font-bold text-[var(--text-main)] tracking-tight leading-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Apply to jobs on WhatsApp.
+            <br />
+            <span className="text-[var(--text-muted)] font-medium">Just reply "YES".</span>
           </h2>
-          <p className="mt-4 text-[var(--text-muted)] text-base sm:text-lg max-w-2xl mx-auto">
-            You don't even have to open your laptop. AgentsKaro discovers matching roles across all portals and sends them to your WhatsApp. Just type <strong>YES</strong> to apply instantly with AI-crafted answers.
+          <p className="mt-4 text-[var(--text-muted)] text-base leading-relaxed">
+            You don't even have to open your laptop. AgentsKaro finds matching roles and sends them to your WhatsApp — complete with ATS match score and salary. Reply <strong className="text-[var(--text-main)] font-semibold">YES</strong> and the autonomous AI agent handles everything.
           </p>
         </div>
 
@@ -57,16 +60,22 @@ export default function WhatsAppFeature({ onOpenDownload }: WhatsAppFeatureProps
                         alt="AgentsKaro Bot"
                         className="w-10 h-10 rounded-full object-cover border border-emerald-400/40 shadow-sm"
                       />
-                      <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-[#1f2c34]" />
+                      <span className="absolute bottom-0 right-0 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500 border-2 border-[#1f2c34]"></span>
+                      </span>
                     </div>
                     <div>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-sm font-bold text-white leading-tight">AgentsKaro AI Bot</span>
+                        <span className="text-sm font-bold text-white leading-tight">AgentsKaro AI Agent</span>
                         <span className="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-bold">
                           VERIFIED
                         </span>
                       </div>
-                      <span className="text-[11px] text-emerald-400 block font-medium">online • instant auto-apply</span>
+                      <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping inline-block" />
+                        <span>online • instant auto-apply active</span>
+                      </div>
                     </div>
                   </div>
 
@@ -146,6 +155,7 @@ export default function WhatsAppFeature({ onOpenDownload }: WhatsAppFeatureProps
                   </div>
                   <button
                     onClick={() => setReplied(!replied)}
+                    aria-label={replied ? "Reset WhatsApp demo" : "Send YES to apply"}
                     className="px-3 py-1.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-black font-extrabold text-[11px] transition-all cursor-pointer shadow-md"
                   >
                     {replied ? "Reset Demo" : "Send YES"}
@@ -158,50 +168,50 @@ export default function WhatsAppFeature({ onOpenDownload }: WhatsAppFeatureProps
           {/* Right Column: Key Benefits & Time Savings (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-3">
-              <span className="text-xs font-black uppercase tracking-widest text-emerald-400">
-                Effortless Career Automation
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black text-[var(--text-main)] tracking-tight">
-                Zero Form Fatigue. Total Control in Your Pocket.
+              <h3
+                className="text-2xl font-bold text-[var(--text-main)] tracking-tight"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Total control in your pocket, anywhere.
               </h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Whether you're traveling in the metro, sitting in a college lecture, or at the gym, your career search never pauses.
+                Whether you're commuting, in a lecture, or at the gym — your job search never stops.
               </p>
             </div>
 
-            <div className="space-y-4">
-              <div className="p-4 rounded-2xl glass-card border border-[var(--card-border)] flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <Zap size={18} />
+            <div className="space-y-3">
+              <div className="surface-card rounded-xl p-4 flex items-start gap-3.5">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-[var(--border)] text-emerald-400 flex items-center justify-center shrink-0">
+                  <Zap size={16} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[var(--text-main)] mb-0.5">1-Second Yes/No Approval</h4>
+                  <h4 className="text-sm font-semibold text-[var(--text-main)] mb-0.5">1-second YES/NO approval</h4>
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                    Review company, role, package, and match score right in chat. Reply "YES" and the desktop client executes the full application in the background.
+                    Review company, role, package, and match score right in chat. Reply YES and the desktop client applies in the background.
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl glass-card border border-[var(--card-border)] flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <BellRing size={18} />
+              <div className="surface-card rounded-xl p-4 flex items-start gap-3.5">
+                <div className="w-9 h-9 rounded-xl bg-[var(--primary)]/10 border border-[var(--border)] text-[var(--primary)] flex items-center justify-center shrink-0">
+                  <BellRing size={16} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[var(--text-main)] mb-0.5">Apply Within 5 Minutes of Posting</h4>
+                  <h4 className="text-sm font-semibold text-[var(--text-main)] mb-0.5">Apply within 5 mins of posting</h4>
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                    Be applicant #1 instead of #1,400. Fresh jobs are fetched within minutes across Internshala, Naukri, Indeed, LinkedIn, and Hirist.
+                    Be applicant #1 instead of #1,400. Jobs are fetched within minutes across Internshala, Naukri, Indeed, LinkedIn, and Hirist.
                   </p>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl glass-card border border-[var(--card-border)] flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <ShieldCheck size={18} />
+              <div className="surface-card rounded-xl p-4 flex items-start gap-3.5">
+                <div className="w-9 h-9 rounded-xl bg-purple-500/10 border border-[var(--border)] text-purple-400 flex items-center justify-center shrink-0">
+                  <ShieldCheck size={16} />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[var(--text-main)] mb-0.5">100% Private & Direct Sync</h4>
+                  <h4 className="text-sm font-semibold text-[var(--text-main)] mb-0.5">100% private & local</h4>
                   <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                    Your WhatsApp communicates securely with your local AgentsKaro Windows client. No third-party data selling or spam.
+                    Your WhatsApp communicates only with your local AgentsKaro client. Nothing is sold or shared.
                   </p>
                 </div>
               </div>
@@ -211,9 +221,9 @@ export default function WhatsAppFeature({ onOpenDownload }: WhatsAppFeatureProps
             <div className="pt-2">
               <button
                 onClick={onOpenDownload}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl glow-button text-black font-black text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg active:scale-95 transition-all"
+                className="btn-primary w-full sm:w-auto px-6 py-3.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer active:scale-95 transition-all"
               >
-                <span>Activate WhatsApp Bot (10 Free Apps)</span>
+                Activate WhatsApp AI Agent (10 Free Apps)
                 <ArrowRight size={15} />
               </button>
             </div>
