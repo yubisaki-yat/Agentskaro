@@ -216,36 +216,40 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
         <div className="max-w-3xl mb-14">
           <span className="section-label">Pricing &amp; Plans</span>
 
-          {/* Super Attractive & Eye-Catching Highlighted Heading */}
+          {/* Super Attractive & Ultra-Professional Highlighted Heading */}
           <h2
             className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-main)] tracking-tight leading-[1.18]"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Land your dream job for
-            <br />
-            <span className="relative inline-block mt-3">
-              {/* Outer Vibrant Glow Effect */}
-              <span className="absolute -inset-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500 rounded-2xl blur-md opacity-30 animate-pulse pointer-events-none" />
-              
-              {/* High-Converting Highlight Badge */}
-              <span className="relative z-10 px-4 py-1.5 rounded-2xl bg-gradient-to-r from-emerald-500/[0.18] via-teal-500/[0.18] to-sky-500/[0.18] border-2 border-emerald-500/50 shadow-xl inline-flex items-center gap-2.5 backdrop-blur-sm">
-                <span className="relative flex h-3 w-3 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-85"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                </span>
-                
-                <span className="bg-gradient-to-r from-emerald-600 via-teal-500 to-sky-600 dark:from-emerald-300 dark:via-teal-300 dark:to-sky-300 bg-clip-text text-transparent font-black tracking-tight drop-shadow-sm">
-                  less than ₹1 a day.
-                </span>
-
-                <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-black uppercase tracking-wider shadow-sm hidden sm:inline-block">
-                  UNREAL VALUE
-                </span>
+            Land your dream job for{" "}
+            <span className="relative inline-block mt-1 sm:mt-0">
+              {/* Premium Radiant Gradient Text with Crisp Typography */}
+              <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-sky-300 dark:to-blue-400 bg-clip-text text-transparent font-black tracking-tight">
+                less than ₹1 a day.
               </span>
+              
+              {/* Sleek, Ultra-Clean Underline Glow Bar */}
+              <span className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-[3px] sm:h-[4px] bg-gradient-to-r from-sky-400 via-blue-600 to-indigo-600 rounded-full shadow-[0_2px_10px_rgba(37,99,235,0.35)]" />
             </span>
           </h2>
 
-          <p className="mt-5 text-[var(--text-muted)] text-base sm:text-lg max-w-2xl leading-relaxed">
+          {/* High-Converting Professional Value Badge */}
+          <div className="mt-4 inline-flex items-center flex-wrap gap-2.5 px-3.5 py-1.5 rounded-full bg-blue-500/[0.08] dark:bg-blue-500/[0.15] border border-blue-500/25 dark:border-blue-400/30 text-xs sm:text-sm font-medium">
+            <span className="relative flex h-2.5 w-2.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-600 dark:bg-blue-400"></span>
+            </span>
+            <span className="text-[var(--text-main)] font-semibold">
+              Plans start at just <span className="text-blue-600 dark:text-sky-400 font-bold">₹29/month</span>
+            </span>
+            <span className="text-blue-300 dark:text-blue-700 hidden sm:inline">•</span>
+            <span className="text-[var(--text-muted)] hidden sm:inline">Cheaper than 1 cup of chai ☕</span>
+            <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] font-extrabold uppercase tracking-wider shadow-sm">
+              UNBEATABLE
+            </span>
+          </div>
+
+          <p className="mt-4 text-[var(--text-muted)] text-base sm:text-lg max-w-2xl leading-relaxed">
             Every plan starts with <strong className="text-[var(--text-main)] font-semibold">10 free applications</strong>. Instant online checkout via UPI, Cards &amp; NetBanking.
           </p>
         </div>
