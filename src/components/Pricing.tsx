@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, ArrowRight, Shield, Zap, Loader2, CheckCircle2, Copy, Download, X } from "lucide-react";
+import { Check, ArrowRight, Shield, Zap, Loader2, CheckCircle2, Copy, Download, X, Sparkles, Mail, Lock } from "lucide-react";
 
 interface PricingProps {
   onOpenDownload: () => void;
@@ -82,6 +82,7 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
     isOpen: boolean;
     planName: string;
     licenseKey: string;
+    verifiedEmail: string;
     paymentId: string;
   } | null>(null);
   const [copied, setCopied] = useState(false);
@@ -134,26 +135,41 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
         order_id: data.orderId,
         handler: async function (response: any) {
           try {
-            // Verify payment on server
+            // A. Verify payment & lock license to the verified email
             const verifyRes = await fetch("/api/verify-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
                 ...response,
+                planId: plan.id,
                 planName: plan.name,
               }),
             });
 
             const verifyData = await verifyRes.json();
+
+            // B. AUTOMATICALLY TRIGGER SOFTWARE DOWNLOAD TO USER'S PC INSTANTLY!
+            const downloadUrl =
+              verifyData.downloadUrl ||
+              process.env.NEXT_PUBLIC_EXE_URL ||
+              "https://github.com/yubisaki-yat/Agentskaro/releases/download/v1.0.0/AgentsKaro-Setup.exe";
+
+            const downloadLink = document.createElement("a");
+            downloadLink.href = downloadUrl;
+            downloadLink.setAttribute("download", "AgentsKaro-Setup-v2.0.exe");
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            downloadLink.remove();
+
+            // C. Show Success modal with verified email lock & license
             if (verifyData.success) {
               setSuccessData({
                 isOpen: true,
                 planName: plan.name,
                 licenseKey: verifyData.licenseKey,
+                verifiedEmail: verifyData.verifiedEmail || "Your registered email",
                 paymentId: verifyData.paymentId,
               });
-            } else {
-              alert("Payment received! We'll send your license key via email.");
             }
           } catch (vErr) {
             console.error("Verification error:", vErr);
@@ -197,17 +213,39 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
 
         {/* Section header */}
-        <div className="max-w-2xl mb-14">
+        <div className="max-w-3xl mb-14">
           <span className="section-label">Pricing &amp; Plans</span>
+
+          {/* Super Attractive & Eye-Catching Highlighted Heading */}
           <h2
-            className="text-3xl sm:text-5xl font-bold text-[var(--text-main)] tracking-tight leading-tight"
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-main)] tracking-tight leading-[1.18]"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Land your dream job for
             <br />
-            less than ₹1 a day.
+            <span className="relative inline-block mt-3">
+              {/* Outer Vibrant Glow Effect */}
+              <span className="absolute -inset-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500 rounded-2xl blur-md opacity-30 animate-pulse pointer-events-none" />
+              
+              {/* High-Converting Highlight Badge */}
+              <span className="relative z-10 px-4 py-1.5 rounded-2xl bg-gradient-to-r from-emerald-500/[0.18] via-teal-500/[0.18] to-sky-500/[0.18] border-2 border-emerald-500/50 shadow-xl inline-flex items-center gap-2.5 backdrop-blur-sm">
+                <span className="relative flex h-3 w-3 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-85"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                
+                <span className="bg-gradient-to-r from-emerald-600 via-teal-500 to-sky-600 dark:from-emerald-300 dark:via-teal-300 dark:to-sky-300 bg-clip-text text-transparent font-black tracking-tight drop-shadow-sm">
+                  less than ₹1 a day.
+                </span>
+
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-black uppercase tracking-wider shadow-sm hidden sm:inline-block">
+                  UNREAL VALUE
+                </span>
+              </span>
+            </span>
           </h2>
-          <p className="mt-4 text-[var(--text-muted)] text-base">
+
+          <p className="mt-5 text-[var(--text-muted)] text-base sm:text-lg max-w-2xl leading-relaxed">
             Every plan starts with <strong className="text-[var(--text-main)] font-semibold">10 free applications</strong>. Instant online checkout via UPI, Cards &amp; NetBanking.
           </p>
         </div>
@@ -325,12 +363,12 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
           </span>
           <span className="flex items-center gap-2 font-medium">
             <Zap size={14} className="text-emerald-500" />
-            Instant automated license key delivery
+            Auto-downloads to PC + Instant email-bound activation
           </span>
         </div>
       </div>
 
-      {/* Payment Success Modal */}
+      {/* Payment Success & Auto-Download Modal */}
       <AnimatePresence>
         {successData?.isOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
@@ -346,7 +384,7 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative w-full max-w-md surface-card rounded-3xl p-6 sm:p-8 z-10 border border-emerald-500/30 shadow-2xl text-center"
+              className="relative w-full max-w-lg surface-card rounded-3xl p-6 sm:p-8 z-10 border border-emerald-500/40 shadow-2xl text-center"
             >
               <button
                 onClick={() => setSuccessData(null)}
@@ -355,16 +393,31 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
                 <X size={16} />
               </button>
 
-              <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 size={32} />
+              <div className="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-500 flex items-center justify-center mx-auto mb-4">
+                <CheckCircle2 size={36} />
               </div>
 
               <h3 className="text-2xl font-bold text-[var(--text-main)] mb-1" style={{ fontFamily: "var(--font-display)" }}>
                 Payment Successful! 🎉
               </h3>
-              <p className="text-xs text-[var(--text-muted)] mb-6">
-                Your <strong>{successData.planName}</strong> is now activated.
+              <p className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold mb-6 flex items-center justify-center gap-1.5">
+                <Download size={14} className="animate-bounce" />
+                <span>AgentsKaro Desktop (.exe) is downloading automatically to your PC...</span>
               </p>
+
+              {/* Email Bound Verification Box */}
+              <div className="p-4 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/25 mb-4 text-left">
+                <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 mb-1">
+                  <Lock size={14} />
+                  <span>SUBSCRIPTION LOCKED &amp; BOUND TO THIS EMAIL:</span>
+                </div>
+                <div className="font-mono text-sm sm:text-base font-bold text-[var(--text-main)] pl-6">
+                  {successData.verifiedEmail}
+                </div>
+                <p className="text-[11px] text-[var(--text-muted)] pl-6 mt-1">
+                  Only this email address is authorized for <strong>{successData.planName}</strong>.
+                </p>
+              </div>
 
               {/* License Key Box */}
               <div className="p-4 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] mb-6 text-left">
@@ -385,16 +438,22 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
                 </div>
               </div>
 
+              {/* Instructions */}
+              <div className="p-3.5 rounded-xl bg-[var(--bg-subtle)] border border-[var(--border)] text-xs text-[var(--text-muted)] text-left mb-6 leading-relaxed">
+                <strong className="text-[var(--text-main)] block mb-1">Next Step to Activate:</strong>
+                Run the downloaded installer on your PC and log in with <strong className="text-[var(--primary)]">{successData.verifiedEmail}</strong>. Your plan activates automatically!
+              </div>
+
               <div className="space-y-2">
                 <button
                   onClick={onOpenDownload}
-                  className="w-full btn-primary py-3 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  className="w-full btn-primary py-3.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
-                  <Download size={15} />
-                  <span>Download Desktop App (.exe)</span>
+                  <Download size={16} />
+                  <span>Click here if download didn&apos;t start</span>
                 </button>
-                <p className="text-[11px] text-[var(--text-subtle)] pt-1">
-                  Reference ID: <code>{successData.paymentId}</code>
+                <p className="text-[10px] text-[var(--text-subtle)] pt-1">
+                  Payment Reference ID: <code>{successData.paymentId}</code>
                 </p>
               </div>
             </motion.div>
