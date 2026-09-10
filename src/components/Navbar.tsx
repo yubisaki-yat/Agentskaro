@@ -58,7 +58,7 @@ export default function Navbar({ onOpenDownload }: NavbarProps) {
                 AgentsKaro
               </span>
               <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-bold bg-[var(--primary)]/10 text-[var(--primary)] border border-[var(--primary)]/20 leading-none">
-                v2.0
+                v3.1.0
               </span>
             </div>
             <span className="block text-[11px] text-[var(--text-subtle)] font-medium tracking-wide mt-0.5">

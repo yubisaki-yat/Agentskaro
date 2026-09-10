@@ -128,7 +128,7 @@ export async function POST(req: Request) {
               </div>
 
               <div style="text-align: center;">
-                <a href="${process.env.NEXT_PUBLIC_EXE_URL || 'https://agentskaro.co.in'}" style="background: #0ea5e9; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: bold; font-size: 14px; display: inline-block;">Download AgentsKaro Desktop (.exe)</a>
+                <a href="${process.env.NEXT_PUBLIC_EXE_URL || 'https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe'}" style="background: #0ea5e9; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: bold; font-size: 14px; display: inline-block;">Download AgentsKaro Desktop (.exe)</a>
               </div>
 
               <p style="color: #64748b; font-size: 11px; text-align: center; margin-top: 24px;">Payment Reference: ${razorpay_payment_id} • AgentsKaro by Yubisaki Assistive Technology</p>
@@ -147,7 +147,7 @@ export async function POST(req: Request) {
       licenseKey,
       paymentId: razorpay_payment_id,
       orderId: razorpay_order_id,
-      downloadUrl: process.env.NEXT_PUBLIC_EXE_URL || "https://github.com/yubisaki-yat/Agentskaro/releases/download/v1.0.0/AgentsKaro-Setup.exe",
+      downloadUrl: process.env.NEXT_PUBLIC_EXE_URL || "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe",
     });
   } catch (error) {
     console.error("Error in verify-payment route:", error);

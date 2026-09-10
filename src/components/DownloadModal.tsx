@@ -33,20 +33,25 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
     };
   }, [isOpen, onClose]);
 
-  const EXE_DOWNLOAD_URL = process.env.NEXT_PUBLIC_EXE_URL || null;
+  // When modal opens, set downloadStarted to true since the website auto-triggers the download
+  useEffect(() => {
+    if (isOpen) {
+      setDownloadStarted(true);
+    }
+  }, [isOpen]);
+
+  const EXE_DOWNLOAD_URL =
+    process.env.NEXT_PUBLIC_EXE_URL ||
+    "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
 
   const handleDownload = () => {
     setDownloadStarted(true);
-    if (EXE_DOWNLOAD_URL) {
-      const link = document.createElement("a");
-      link.href = EXE_DOWNLOAD_URL;
-      link.setAttribute("download", "AgentsKaro-Setup-v2.0.exe");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } else {
-      console.log("Download URL not configured yet. Set NEXT_PUBLIC_EXE_URL in env vars.");
-    }
+    const link = document.createElement("a");
+    link.href = EXE_DOWNLOAD_URL;
+    link.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
@@ -139,7 +144,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                     AgentsKaro Desktop
                   </h3>
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[var(--primary)]/10 text-[var(--primary)] rounded-full border border-[var(--primary)]/20">
-                    v2.0
+                    v3.1.0
                   </span>
                 </div>
                 <p className="text-xs text-[var(--text-muted)] mt-0.5">
@@ -227,7 +232,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                       10 Free Applications Included
                     </h4>
                     <p className="text-xs text-[var(--text-muted)]">
-                      Windows 10 / 11 (64-bit) • 368 MB installer • No credit card needed.
+                      Windows 10 / 11 (64-bit) • 348 MB installer • No credit card needed.
                     </p>
                   </div>
                   <button

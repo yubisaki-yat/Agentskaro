@@ -152,11 +152,11 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
             const downloadUrl =
               verifyData.downloadUrl ||
               process.env.NEXT_PUBLIC_EXE_URL ||
-              "https://github.com/yubisaki-yat/Agentskaro/releases/download/v1.0.0/AgentsKaro-Setup.exe";
+              "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
 
             const downloadLink = document.createElement("a");
             downloadLink.href = downloadUrl;
-            downloadLink.setAttribute("download", "AgentsKaro-Setup-v2.0.exe");
+            downloadLink.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
             document.body.appendChild(downloadLink);
             downloadLink.click();
             downloadLink.remove();

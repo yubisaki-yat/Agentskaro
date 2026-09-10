@@ -72,10 +72,10 @@ Aapka desktop installer (`AgentsKaro-Setup.exe` ya `backend.exe`) 300MB+ ka hota
 5. **Publish release** green button par click karein.
 6. Publish hone ke baad page par uploaded `.exe` file dikhegi:
    - Us file par **Right Click** karein ➔ **"Copy link address"** karein.
-   - Aapka link aisa dikhega:
-     ```
-     https://github.com/yubisaki-yat/Agentskaro/releases/download/v2.0.0/AgentsKaro-Setup.exe
-     ```
+    - Aapka direct download link:
+      ```
+      https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe
+      ```
 7. Ye link aapka **DIRECT DOWNLOAD URL** hai. Isko sambhal kar rakhein (ye Render ke environment variable `NEXT_PUBLIC_EXE_URL` me use hoga).
 
 ---
@@ -173,7 +173,7 @@ Render me **Environment** tab me ja kar ye variables add karein:
 | `NEXT_PUBLIC_RAZORPAY_KEY_ID` | `rzp_live_T9QskI09LEMA1s` | Frontend checkout popup ke liye |
 | `RAZORPAY_WEBHOOK_SECRET` | `AgKaro@Webhook2026!` | Webhook signature verification |
 | `NEXT_PUBLIC_APP_URL` | `https://agentskaro.co.in` | Live production website URL |
-| `NEXT_PUBLIC_EXE_URL` | *(GitHub Release ka direct download link jo Step 1 me mila)* | Auto-download installer link |
+| `NEXT_PUBLIC_EXE_URL` | `https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe` | Auto-download installer link (GitHub Release v3.1.0) |
 | `SMTP_HOST` | `smtp.gmail.com` | Email delivery host |
 | `SMTP_PORT` | `587` | TLS Port |
 | `SMTP_USER` | `agentskaro.noreply@gmail.com` | Notification sender email |
@@ -254,7 +254,7 @@ Ab har valid payment par Razorpay seedha aapke server ko secure update bhej dega
 
 | No. | Kaam | Kahan Karna Hai | Status |
 | :---: | :--- | :--- | :---: |
-| 1 | `AgentsKaro-Setup.exe` file ko GitHub Release me upload karke download link copy karna | [GitHub Releases](https://github.com/yubisaki-yat/Agentskaro/releases) | 🔲 Pending (Aapko karna hai) |
+| 1 | `AgentsKaro.Setup.3.1.0.exe` file ko GitHub Release me upload karke download link copy karna | [GitHub Releases](https://github.com/yubisaki-yat/Agentskaro/releases) | ✅ **DONE (v3.1.0 Configured)** |
 | 2 | Render par purani service se domain delete karna | [Render Dashboard](https://dashboard.render.com) | 🔲 Pending (Aapko karna hai) |
 | 3 | Render par nayi Web Service banakar Environment Variables paste karna | [Render Dashboard](https://dashboard.render.com) | 🔲 Pending (Aapko karna hai) |
 | 4 | GoDaddy me A record aur CNAME record update karna | [GoDaddy DNS](https://godaddy.com) | 🔲 Pending (Aapko karna hai) |

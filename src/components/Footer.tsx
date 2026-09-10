@@ -115,7 +115,7 @@ export default function Footer({ onOpenDownload }: FooterProps) {
               {/* Operational status */}
               <div className="status-live w-fit">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse-dot" />
-                All systems operational · v2.0
+                All systems operational · v3.1.0
               </div>
             </div>
 

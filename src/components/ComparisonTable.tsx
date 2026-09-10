@@ -91,7 +91,7 @@ export default function ComparisonTable({ onOpenDownload }: ComparisonProps) {
           <div className="rounded-2xl p-7 bg-[var(--primary)]/[0.05] border border-[var(--primary)]/[0.2] relative overflow-hidden">
             {/* Corner tag */}
             <div className="absolute top-0 right-0 bg-[var(--primary)] text-white text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-xl">
-              v2.0 Engine
+              v3.1.0 Engine
             </div>
             <div className="flex items-center justify-between mb-6 pb-5 border-b border-[var(--border)]">
               <div>

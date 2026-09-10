@@ -17,7 +17,7 @@ export default function SEOContentSection() {
             An <strong className="text-[var(--text-main)] font-semibold">AI Job Application Bot</strong> is an autonomous software agent designed to scan career portals (such as <em>Naukri.com</em>, <em>Internshala</em>, <em>Indeed</em>, and <em>LinkedIn</em>), extract job descriptions, evaluate ATS keyword compatibility against a candidate’s resume, and automatically complete screening questions and form submissions.
           </p>
           <p>
-            Historically, job seekers spent an average of 10 to 15 minutes per application manually copying answers to repetitive questions like <em>"Why are you interested in this position?"</em> or calculating total relevant experience. With <strong className="text-[var(--text-main)] font-semibold">AgentsKaro Desktop v2.0</strong>, autonomous algorithms evaluate recruiter questions in milliseconds and compose truthful, customized responses aligned with the specific job description.
+            Historically, job seekers spent an average of 10 to 15 minutes per application manually copying answers to repetitive questions like <em>"Why are you interested in this position?"</em> or calculating total relevant experience. With <strong className="text-[var(--text-main)] font-semibold">AgentsKaro Desktop v3.1.0</strong>, autonomous algorithms evaluate recruiter questions in milliseconds and compose truthful, customized responses aligned with the specific job description.
           </p>
           <div className="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)]">
             <h4 className="font-semibold text-sm text-[var(--text-main)] mb-2">Key Ranking Factors for Job Search Automation:</h4>

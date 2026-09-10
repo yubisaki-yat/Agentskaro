@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     template: "%s | AgentsKaro - AI Job Bot",
   },
   description:
-    "Download AgentsKaro v2.0 for Windows 10/11. Automate job applications across Internshala, Naukri, Indeed, LinkedIn, Hirist & WhatsApp. AI answer engine, ATS resume matcher, and stealth anti-ban protection. 10 Free Applications included.",
+    "Download AgentsKaro v3.1.0 for Windows 10/11. Automate job applications across Internshala, Naukri, Indeed, LinkedIn, Hirist & WhatsApp. AI answer engine, ATS resume matcher, and stealth anti-ban protection. 10 Free Applications included.",
   applicationName: "AgentsKaro Desktop",
   category: "Software / Job Search Automation",
   classification: "Autonomous AI Job Search Agent",

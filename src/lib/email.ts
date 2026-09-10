@@ -166,7 +166,7 @@ export function generateWelcomeEmailHtml(userEmail: string): string {
       <tr>
         <td class="header">
           <img src="https://agentskaro.co.in/logo.png" alt="AgentsKaro Logo" width="68" height="68" style="border-radius: 18px; margin-bottom: 16px; border: 1px solid rgba(0, 242, 254, 0.4); display: inline-block; box-shadow: 0 4px 20px rgba(0, 242, 254, 0.35);" /><br>
-          <div class="logo-badge">AgentsKaro Official v2.0</div>
+          <div class="logo-badge">AgentsKaro Official v3.1.0</div>
           <h1>Welcome to the Future of Job Hunting 🚀</h1>
           <p>Your 10 Free Applications trial is ready to activate on Windows 10/11.</p>
         </td>
@@ -183,7 +183,7 @@ export function generateWelcomeEmailHtml(userEmail: string): string {
           </p>
 
           <!-- Download CTA -->
-          <a href="https://agentskaro.co.in" class="btn">
+          <a href="${process.env.NEXT_PUBLIC_EXE_URL || 'https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe'}" class="btn">
             Download AgentsKaro Desktop (.exe)
           </a>
 
@@ -191,7 +191,7 @@ export function generateWelcomeEmailHtml(userEmail: string): string {
           <div class="card">
             <h3 style="margin: 0 0 14px; font-size: 15px; color: #ffffff;">⚡ 3-Step Instant Setup Guide:</h3>
             <div style="font-size: 13px; color: #94a3b8; line-height: 1.8;">
-              <div><span class="step-num">01</span> Download & install the 368MB clean binary on Windows 10/11.</div>
+              <div><span class="step-num">01</span> Download & install the 348MB clean binary on Windows 10/11.</div>
               <div><span class="step-num">02</span> Connect your portal accounts (Internshala, Naukri.com, Indeed).</div>
               <div><span class="step-num">03</span> Select your target job titles & launch the autonomous stealth bot!</div>
             </div>
@@ -255,7 +255,7 @@ export async function sendWelcomeEmail(toEmail: string) {
     from: FROM_EMAIL,
     to: toEmail,
     subject: "Welcome to AgentsKaro! 🚀 Your 10 Free Applications Are Ready",
-    text: `Welcome to AgentsKaro Desktop v2.0!\n\nYour 10 Free Applications trial is ready to activate on Windows 10/11.\n\nDownload now at https://agentskaro.co.in\n\nFeatures Included:\n- Internshala, Naukri, Indeed Auto-Apply\n- AI Dynamic Answer Engine\n- Stealth Anti-Ban protection\n- Automatic Excel report export\n\nA Product by Yubisaki Assistive Technology (yubisaki.in)\nSent from agentskaro.noreply@gmail.com`,
+    text: `Welcome to AgentsKaro Desktop v3.1.0!\n\nYour 10 Free Applications trial is ready to activate on Windows 10/11.\n\nDownload now at ${process.env.NEXT_PUBLIC_EXE_URL || 'https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe'}\n\nFeatures Included:\n- Internshala, Naukri, Indeed Auto-Apply\n- AI Dynamic Answer Engine\n- Stealth Anti-Ban protection\n- Automatic Excel report export\n\nA Product by Yubisaki Assistive Technology (yubisaki.in)\nSent from agentskaro.noreply@gmail.com`,
     html: generateWelcomeEmailHtml(toEmail),
   };
 

@@ -36,7 +36,7 @@ const RECENT_ACTIVITIES = [
   {
     name: "Rohan D.",
     city: "Mumbai",
-    action: "Downloaded AgentsKaro Desktop v2.0 (.exe)",
+    action: "Downloaded AgentsKaro Desktop v3.1.0 (.exe)",
     time: "Just now",
     type: "download",
   },

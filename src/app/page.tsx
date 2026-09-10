@@ -36,10 +36,10 @@ export default function Home() {
     // Trigger direct .exe download instantly — zero gates, zero required fields
     const exeUrl =
       process.env.NEXT_PUBLIC_EXE_URL ||
-      "https://github.com/yubisaki-yat/Agentskaro/releases/download/v1.0.0/AgentsKaro-Setup.exe";
+      "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
     const link = document.createElement("a");
     link.href = exeUrl;
-    link.setAttribute("download", "AgentsKaro-Setup-v2.0.exe");
+    link.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -120,7 +120,7 @@ export default function Home() {
               </div>
               <div className="hidden sm:block">
                 <div className="text-xs font-bold text-[var(--text-main)] leading-none" style={{ fontFamily: "var(--font-display)" }}>
-                  AgentsKaro Desktop v2.0
+                  AgentsKaro Desktop v3.1.0
                 </div>
                 <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">
                   10 Free Applications Included
