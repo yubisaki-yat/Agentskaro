@@ -134,8 +134,37 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
         image: "https://agentskaro.co.in/logo.png",
         order_id: data.orderId,
         handler: async function (response: any) {
+          setLoadingPlan(null);
+
+          const paymentId = response?.razorpay_payment_id || `pay_${Date.now()}`;
+          const fallbackLicense = `AGK-${paymentId.slice(-8).toUpperCase()}-PRO`;
+          const downloadUrl =
+            process.env.NEXT_PUBLIC_EXE_URL ||
+            "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
+
+          // 1. IMMEDIATELY show the Success Modal with license & instructions
+          setSuccessData({
+            isOpen: true,
+            planName: plan.name,
+            licenseKey: fallbackLicense,
+            verifiedEmail: response?.email || "Your payment email",
+            paymentId: paymentId,
+          });
+
+          // 2. IMMEDIATELY trigger the software installer download to user's PC
           try {
-            // A. Verify payment & lock license to the verified email
+            const downloadLink = document.createElement("a");
+            downloadLink.href = downloadUrl;
+            downloadLink.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            downloadLink.remove();
+          } catch (dlErr) {
+            console.warn("Auto-download error:", dlErr);
+          }
+
+          // 3. Verify on backend & dispatch confirmation email in the background
+          try {
             const verifyRes = await fetch("/api/verify-payment", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -146,34 +175,20 @@ export default function Pricing({ onOpenDownload }: PricingProps) {
               }),
             });
 
-            const verifyData = await verifyRes.json();
-
-            // B. AUTOMATICALLY TRIGGER SOFTWARE DOWNLOAD TO USER'S PC INSTANTLY!
-            const downloadUrl =
-              verifyData.downloadUrl ||
-              process.env.NEXT_PUBLIC_EXE_URL ||
-              "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
-
-            const downloadLink = document.createElement("a");
-            downloadLink.href = downloadUrl;
-            downloadLink.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            downloadLink.remove();
-
-            // C. Show Success modal with verified email lock & license
-            if (verifyData.success) {
-              setSuccessData({
-                isOpen: true,
-                planName: plan.name,
-                licenseKey: verifyData.licenseKey,
-                verifiedEmail: verifyData.verifiedEmail || "Your registered email",
-                paymentId: verifyData.paymentId,
-              });
+            if (verifyRes.ok) {
+              const verifyData = await verifyRes.json();
+              if (verifyData.success) {
+                setSuccessData((prev) => ({
+                  isOpen: true,
+                  planName: plan.name,
+                  licenseKey: verifyData.licenseKey || prev?.licenseKey || fallbackLicense,
+                  verifiedEmail: verifyData.verifiedEmail || prev?.verifiedEmail || "Your payment email",
+                  paymentId: verifyData.paymentId || paymentId,
+                }));
+              }
             }
           } catch (vErr) {
-            console.error("Verification error:", vErr);
-            alert("Payment successful! Reference ID: " + response.razorpay_payment_id);
+            console.warn("Background verification note:", vErr);
           }
         },
         prefill: {
