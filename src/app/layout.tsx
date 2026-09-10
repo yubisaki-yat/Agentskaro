@@ -51,7 +51,11 @@ export const metadata: Metadata = {
     "AgentsKaro Windows",
     "agentskaro.co.in",
     "Yubisaki Assistive Technology",
+    "Yubisaki Assistive Technology Private Limited",
+    "YAT",
+    "YAT job bot",
     "Yubisaki job bot",
+    "Yubisaki AI software",
     // Core Category Keywords
     "AI job application bot",
     "autonomous job applicant",
@@ -59,6 +63,7 @@ export const metadata: Metadata = {
     "job application automation",
     "AI job search assistant",
     "automatic job apply software",
+    "AI job bot for Windows",
     // Platform Specific High-Search Keywords
     "Naukri auto apply bot",
     "Naukri job scraper software",
@@ -70,6 +75,13 @@ export const metadata: Metadata = {
     "Wellfound bot auto apply",
     "WhatsApp job apply bot",
     "apply jobs via WhatsApp",
+    // v3.1.0 New Features & Crawlers
+    "company career crawler bot",
+    "enterprise career portal crawler",
+    "dynamic password studio for job portals",
+    "AI cold email recruiter outreach bot",
+    "Google Gemini recruiter pitch generator",
+    "Greenhouse Lever Workday auto applier",
     // Audience & Location
     "job search bot India",
     "fresher job application bot",
@@ -83,6 +95,7 @@ export const metadata: Metadata = {
     "Excel job application tracker export",
     "free job application bot",
     "download job bot .exe",
+    "LazyApply alternative India",
   ],
   authors: [
     { name: "Yubisaki Assistive Technology", url: "https://yubisaki.in" },
@@ -123,7 +136,7 @@ export const metadata: Metadata = {
     siteName: "AgentsKaro",
     title: "AgentsKaro - Apply to 500+ Jobs on Autopilot with AI & WhatsApp",
     description:
-      "Automate job applications across Internshala, Naukri, Indeed, LinkedIn & WhatsApp with AI answers, ATS resume scoring, and stealth protection. Download 368MB Windows client.",
+      "Automate job applications across Internshala, Naukri, Indeed, LinkedIn, Company Career Portals & WhatsApp with AI answers, ATS resume scoring, and stealth protection. Download 348MB Windows client.",
     images: [
       {
         url: "https://agentskaro.co.in/logo.png",
@@ -154,13 +167,13 @@ const structuredData = {
     {
       "@type": "SoftwareApplication",
       "@id": "https://agentskaro.co.in/#software",
-      name: "AgentsKaro Desktop",
-      alternateName: "AgentsKaro Autonomous Recruiter Client",
+      name: "AgentsKaro",
+      alternateName: "AgentsKaro Autonomous AI Job Application Platform",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Windows 10, Windows 11 (64-bit)",
-      fileSize: "368MB",
-      softwareVersion: "2.0.0",
-      downloadUrl: "https://agentskaro.co.in",
+      fileSize: "348MB",
+      softwareVersion: "3.1.0",
+      downloadUrl: "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe",
       image: "https://agentskaro.co.in/logo.png",
       screenshot: "https://agentskaro.co.in/logo.png",
       offers: {
@@ -174,7 +187,7 @@ const structuredData = {
         "@type": "AggregateRating",
         ratingValue: "4.9",
         bestRating: "5",
-        ratingCount: "482",
+        ratingCount: "1280",
       },
       featureList: [
         "WhatsApp 1-Click 'YES / NO' Auto-Apply",
@@ -182,34 +195,40 @@ const structuredData = {
         "Naukri.com Automated Scraper and Job Submitter",
         "Indeed Portal Bot",
         "LinkedIn Auto-Apply Integration",
+        "Company Career Portal Crawler & Job Extractor (v3.1.0)",
+        "Dynamic Password Studio for Career Portals (v3.1.0)",
+        "Google Gemini AI Cold Email Recruiter Outreach Bot",
+        "Greenhouse, Lever & Workday Auto Applier",
+        "Visible Chrome Session & Stealth Anti-Ban Mode",
         "Smart AI Answer Engine for Recruiter Screening Questions",
         "ATS Resume and Job Description Match Intelligence",
-        "Stealth Anti-Ban Human Emulation Mode",
         "Automated Excel (.xlsx) Report Tracker",
       ],
       publisher: {
         "@type": "Organization",
         "@id": "https://yubisaki.in/#organization",
-        name: "Yubisaki Assistive Technology",
+        name: "Yubisaki Assistive Technology Private Limited",
         url: "https://yubisaki.in",
         logo: "https://agentskaro.co.in/logo.png",
       },
       description:
-        "Autonomous AI desktop client that automates job applications across Internshala, Naukri, Indeed, LinkedIn, and WhatsApp with stealth anti-bot protection and AI subjective answers.",
+        "Autonomous AI Job Application Software for Windows. Automatically submits job applications across Internshala, Naukri, Indeed, and enterprise career portals with AI answers, dynamic password autofill, and ATS resume matching.",
     },
 
     // 2. Organization Schema
     {
       "@type": "Organization",
       "@id": "https://yubisaki.in/#organization",
-      name: "Yubisaki Assistive Technology",
-      legalName: "Yubisaki Assistive Technology",
-      url: "https://yubisaki.in",
+      name: "Yubisaki Assistive Technology Private Limited",
+      legalName: "Yubisaki Assistive Technology Private Limited",
+      alternateName: "YAT",
+      url: "https://agentskaro.co.in",
       logo: "https://agentskaro.co.in/logo.png",
       slogan: "Assistive Technology for Everyone",
       sameAs: [
         "https://agentskaro.co.in",
         "https://yubisaki.in",
+        "https://github.com/yubisaki-yat/Agentskaro",
       ],
     },
 
