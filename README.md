@@ -54,3 +54,4 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## 📄 License & Organization
 Developed and maintained by **Yubisaki Assistive Technology** (`yubisaki.in`). All rights reserved.
+# Agentskaro
