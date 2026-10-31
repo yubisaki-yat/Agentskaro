@@ -90,26 +90,24 @@ const TOP_FEATURES = [
 export default function Hero({ onOpenDownload }: HeroProps) {
   return (
     <section className="relative pt-28 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-grid-dots">
-      {/* Ambient background glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[850px] h-[550px] bg-gradient-to-b from-[var(--primary)]/15 via-[var(--primary)]/[0.04] to-transparent rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-indigo-500/[0.08] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-1/3 left-0 w-[400px] h-[400px] bg-cyan-500/[0.06] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Official Release Pill */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="flex justify-center mb-6 sm:mb-8"
         >
-          <div className="inline-flex items-center flex-wrap justify-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg-card)]/80 backdrop-blur-md shadow-sm hover:border-[var(--primary)]/40 transition-all">
+          <div className="inline-flex items-center flex-wrap justify-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg-card)]/80 backdrop-blur-md shadow-sm">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
             <span className="px-2 py-0.5 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] text-[10px] font-extrabold uppercase tracking-wider border border-[var(--primary)]/20">
-              v3.1.0 Released
+              v3.5.0 Released
             </span>
             <span className="text-xs text-[var(--text-main)] font-medium">
               1-Click WhatsApp Auto-Apply &amp; Multi-Portal Queues Live
@@ -118,7 +116,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           </div>
         </motion.div>
 
-        {/* Hero Heading & Subheading */}
         <div className="text-center max-w-5xl mx-auto mb-8 sm:mb-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -129,11 +126,9 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           >
             Apply to <span className="text-[var(--text-main)]">500+ Jobs</span> on Autopilot{" "}
             <span className="relative inline-block mt-1 sm:mt-0">
-              {/* Premium Gradient Headline Accent */}
               <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-sky-300 dark:to-blue-400 bg-clip-text text-transparent font-black">
                 While You Sleep
               </span>
-              <span className="absolute -bottom-1 sm:-bottom-2 left-0 right-0 h-[3px] sm:h-[4px] bg-gradient-to-r from-sky-400 via-blue-600 to-indigo-600 rounded-full shadow-[0_2px_12px_rgba(14,165,233,0.4)]" />
             </span>
           </motion.h1>
 
@@ -149,7 +144,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           </motion.p>
         </div>
 
-        {/* High-Converting CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -159,7 +153,7 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           <button
             onClick={onOpenDownload}
             aria-label="Download AgentsKaro for Windows"
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-bold text-base flex items-center justify-center gap-3 shadow-xl shadow-sky-500/25 active:scale-95 transition-all cursor-pointer group"
+            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-bold text-base flex items-center justify-center gap-3 shadow-lg shadow-sky-500/20"
           >
             <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
               <Download size={18} className="stroke-[2.5]" />
@@ -167,14 +161,14 @@ export default function Hero({ onOpenDownload }: HeroProps) {
             <div className="text-left">
               <span className="block leading-none font-bold">Download for Windows</span>
               <span className="block text-[11px] text-sky-100/90 font-medium mt-0.5">
-                v3.1.0 • .exe • 10 Free Applications Included
+                v3.5.0 • .exe • 10 Free Applications Included
               </span>
             </div>
           </button>
 
           <a
             href="#how-it-works"
-            className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--primary)]/50 text-[var(--text-main)] font-semibold text-base flex items-center justify-center gap-2.5 transition-all shadow-sm hover:shadow-md cursor-pointer group"
+            className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--primary)]/50 text-[var(--text-main)] font-semibold text-base flex items-center justify-center gap-3 shadow-sm"
           >
             <div className="w-8 h-8 rounded-xl bg-[var(--badge-bg)] flex items-center justify-center shrink-0 text-[var(--primary)] group-hover:scale-110 transition-transform">
               <Play size={14} className="fill-[var(--primary)]" />
@@ -184,7 +178,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           </a>
         </motion.div>
 
-        {/* Operating System Compatibility Notice */}
         <div className="flex items-center justify-center gap-3 text-xs text-[var(--text-subtle)] mb-8">
           <span className="flex items-center gap-1.5 font-medium text-emerald-600 dark:text-emerald-400">
             <span className="relative flex h-2 w-2">
@@ -197,14 +190,12 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           <span className="text-amber-600 dark:text-amber-400 font-medium">macOS &amp; Linux in Private Beta</span>
         </div>
 
-        {/* Rating & Trust Strip */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 p-3 sm:p-4 rounded-2xl bg-[var(--bg-card)]/50 border border-[var(--border)]/60 max-w-4xl mx-auto backdrop-blur-sm"
         >
-          {/* Stars rating */}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-0.5">
               {[...Array(5)].map((_, i) => (
@@ -233,7 +224,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           </div>
         </motion.div>
 
-        {/* Redesigned Premium 4-Pillar Feature Cards (The Ones Highlighted by User) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -246,26 +236,20 @@ export default function Hero({ onOpenDownload }: HeroProps) {
               <a
                 key={feat.id}
                 href={feat.href}
-                className="group relative rounded-2xl p-5 surface-card hover:border-[var(--primary)]/60 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+                className="group relative rounded-2xl p-5 surface-card hover:border-[var(--primary)]/60 transition-all duration-300 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md"
               >
-                {/* Subtle corner ambient glow on hover */}
                 <div
                   className="absolute -top-12 -right-12 w-28 h-28 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   style={{ background: feat.accentGlow }}
                 />
 
                 <div>
-                  {/* Top row: Themed Glowing Icon + Live Status Badge */}
                   <div className="flex items-center justify-between gap-2 mb-4">
-                    <div
-                      className={`w-11 h-11 rounded-xl flex items-center justify-center border transition-transform duration-300 group-hover:scale-110 shadow-sm ${feat.iconContainer}`}
-                    >
+                    <div className={`w-11 h-11 rounded-xl flex items-center justify-center border transition-transform duration-300 group-hover:scale-110 shadow-sm ${feat.iconContainer}`}>
                       <Icon size={20} className="stroke-[2.2]" />
                     </div>
 
-                    <span
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider border shrink-0 ${feat.badgeClass}`}
-                    >
+                    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider border shrink-0 ${feat.badgeClass}`}>
                       <span className="relative flex h-1.5 w-1.5">
                         <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${feat.dotClass}`}></span>
                         <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${feat.dotClass}`}></span>
@@ -274,7 +258,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
                     </span>
                   </div>
 
-                  {/* Title & Description */}
                   <h3 className="text-[15px] font-bold text-[var(--text-main)] group-hover:text-[var(--primary)] transition-colors tracking-tight leading-snug mb-1.5">
                     {feat.title}
                   </h3>
@@ -283,7 +266,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
                   </p>
                 </div>
 
-                {/* Bottom Interactive Micro-Action Link */}
                 <div className="mt-5 pt-3.5 border-t border-[var(--border)]/60 flex items-center justify-between text-xs font-semibold text-[var(--text-subtle)] group-hover:text-[var(--primary)] transition-colors">
                   <span>{feat.actionText}</span>
                   <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
@@ -293,7 +275,6 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           })}
         </motion.div>
 
-        {/* Live Software Mockup / Interactive Terminal */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
@@ -302,14 +283,11 @@ export default function Hero({ onOpenDownload }: HeroProps) {
           <LiveSoftwareMockup />
         </motion.div>
 
-        {/* Bottom Connected Stats Strip */}
         <div className="mt-12 border border-[var(--border)] rounded-2xl overflow-hidden grid grid-cols-2 md:grid-cols-4 bg-[var(--bg-card)] shadow-sm">
           {STATS.map((stat, idx) => (
             <div
               key={idx}
-              className={`py-6 px-6 text-center transition-colors hover:bg-[var(--bg-card-hover)] ${
-                idx < 3 ? "border-r border-[var(--border)]" : ""
-              } ${idx < 2 ? "border-b border-[var(--border)] md:border-b-0" : ""}`}
+              className={`py-6 px-6 text-center transition-colors hover:bg-[var(--bg-card-hover)] ${idx < 3 ? "border-r border-[var(--border)]" : ""} ${idx < 2 ? "border-b border-[var(--border)] md:border-b-0" : ""}`}
             >
               <div
                 className="text-2xl sm:text-3xl font-extrabold text-[var(--text-main)] tracking-tight mb-1"
@@ -326,4 +304,3 @@ export default function Hero({ onOpenDownload }: HeroProps) {
     </section>
   );
 }
-

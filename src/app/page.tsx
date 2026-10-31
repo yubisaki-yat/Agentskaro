@@ -29,7 +29,6 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky CTA after scrolling past 600px
       setShowStickyCTA(window.scrollY > 600);
     };
     window.addEventListener("scroll", handleScroll);
@@ -37,70 +36,45 @@ export default function Home() {
   }, []);
 
   const openDownload = () => {
-    // Use the actual latest release asset. Fallback to the GitHub latest-download URL
-    // to avoid broken direct links when the tag and asset versions drift.
     const exeUrl = process.env.NEXT_PUBLIC_EXE_URL || DEFAULT_EXE_URL;
+
     const link = document.createElement("a");
     link.href = exeUrl;
     link.setAttribute("download", DOWNLOAD_FILE_NAME);
     link.rel = "noopener noreferrer";
+    link.target = "_blank";
     document.body.appendChild(link);
-    link.click();
-    link.remove();
 
-    // Also display the setup instructions & Windows guide
+    try {
+      link.click();
+    } catch (error) {
+      window.open(exeUrl, "_blank", "noopener,noreferrer");
+    }
+
+    link.remove();
     setIsDownloadOpen(true);
   };
+
   const closeDownload = () => setIsDownloadOpen(false);
 
   return (
     <main id="main-content" className="min-h-screen bg-[var(--bg-page)] text-[var(--text-main)] relative bg-mesh-grid transition-colors duration-300">
-      {/* Navigation with Theme Switcher */}
       <Navbar onOpenDownload={openDownload} />
-
-      {/* Hero Section with Live Simulator */}
       <Hero onOpenDownload={openDownload} />
-
-      {/* Massive Multi-Portal Ecosystem: Live vs Upcoming National & Global Platforms */}
       <SupportedPlatforms onOpenDownload={openDownload} />
-
-      {/* Bento Grid Core Features */}
       <FeaturesBento />
-
-      {/* Game-Changing WhatsApp AI Assistant & 1-Click Yes/No Auto-Apply */}
       <WhatsAppFeature onOpenDownload={openDownload} />
-
-      {/* AgentsKaro vs The Old Way Comparison */}
       <ComparisonTable onOpenDownload={openDownload} />
-
-      {/* 4-Step How It Works */}
       <HowItWorks onOpenDownload={openDownload} />
-
-      {/* Interactive Time & Money ROI Calculator */}
       <ROICalculator onOpenDownload={openDownload} />
-
-      {/* Transparent 3-Tier Pricing */}
       <Pricing onOpenDownload={openDownload} />
-
-      {/* Verified Testimonials */}
       <Testimonials />
-
-      {/* Frequently Asked Questions Accordion */}
       <FAQ />
-
-      {/* SEO & Knowledge Base Content Hub for Search Engines */}
       <SEOContentSection />
-
-      {/* Redesigned Rich Footer with Pre-Footer CTA Banner & Yubisaki Branding */}
       <Footer onOpenDownload={openDownload} />
-
-      {/* Interactive Download / Early Access Modal */}
       <DownloadModal isOpen={isDownloadOpen} onClose={closeDownload} />
-
-      {/* Live Social Proof Activity Ticker */}
       <LiveSocialToast />
 
-      {/* Floating Bottom Quick-Download Bar (appears on scroll) */}
       <AnimatePresence>
         {showStickyCTA && (
           <motion.div

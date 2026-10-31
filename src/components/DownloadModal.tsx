@@ -11,6 +11,10 @@ interface DownloadModalProps {
 
 type OperatingSystem = "windows" | "macos" | "linux";
 
+const DOWNLOAD_FILE_NAME = "AgentsKaro.Setup.3.5.0.exe";
+const DEFAULT_EXE_URL =
+  "https://github.com/yubisaki-yat/Agentskaro/releases/latest/download/AgentsKaro.Setup.3.5.0.exe";
+
 export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
   const [selectedOS, setSelectedOS] = useState<OperatingSystem>("windows");
   const [email, setEmail] = useState("");
@@ -19,7 +23,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [downloadStarted, setDownloadStarted] = useState(false);
 
-  // Close modal on Escape key
   useEffect(() => {
     if (!isOpen) return;
     const handleEsc = (e: KeyboardEvent) => {
@@ -33,24 +36,30 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
     };
   }, [isOpen, onClose]);
 
-  // When modal opens, set downloadStarted to true since the website auto-triggers the download
   useEffect(() => {
     if (isOpen) {
       setDownloadStarted(true);
     }
   }, [isOpen]);
 
-  const EXE_DOWNLOAD_URL =
-    process.env.NEXT_PUBLIC_EXE_URL ||
-    "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
+  const EXE_DOWNLOAD_URL = process.env.NEXT_PUBLIC_EXE_URL || DEFAULT_EXE_URL;
 
   const handleDownload = () => {
     setDownloadStarted(true);
+
     const link = document.createElement("a");
     link.href = EXE_DOWNLOAD_URL;
-    link.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
+    link.setAttribute("download", DOWNLOAD_FILE_NAME);
+    link.rel = "noopener noreferrer";
+    link.target = "_blank";
     document.body.appendChild(link);
-    link.click();
+
+    try {
+      link.click();
+    } catch (error) {
+      window.open(EXE_DOWNLOAD_URL, "_blank", "noopener,noreferrer");
+    }
+
     link.remove();
   };
 
@@ -66,9 +75,9 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          email: cleanEmail, 
-          source: `download_modal_${selectedOS}` 
+        body: JSON.stringify({
+          email: cleanEmail,
+          source: `download_modal_${selectedOS}`,
         }),
       });
 
@@ -92,7 +101,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -102,7 +110,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
             aria-hidden="true"
           />
 
-          {/* Modal Dialog */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -113,10 +120,8 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
             aria-labelledby="download-modal-title"
             className="relative w-full max-w-xl surface-card rounded-3xl p-6 sm:p-8 z-10 border border-[var(--border)] overflow-hidden shadow-2xl my-8"
           >
-            {/* Ambient background glow */}
             <div className="absolute top-0 right-0 w-72 h-72 bg-[var(--primary)]/[0.08] rounded-full blur-3xl pointer-events-none" />
 
-            {/* Close button */}
             <button
               onClick={onClose}
               aria-label="Close download dialog"
@@ -125,7 +130,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
               <X size={18} />
             </button>
 
-            {/* Header */}
             <div className="flex items-center gap-4 mb-6">
               <div className="relative shrink-0">
                 <img
@@ -144,7 +148,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                     AgentsKaro Desktop
                   </h3>
                   <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[var(--primary)]/10 text-[var(--primary)] rounded-full border border-[var(--primary)]/20">
-                    v3.1.0
+                    v3.5.0
                   </span>
                 </div>
                 <p className="text-xs text-[var(--text-muted)] mt-0.5">
@@ -153,13 +157,11 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
               </div>
             </div>
 
-            {/* OS Selector Tabs (Windows Available, macOS & Linux Coming Soon) */}
             <div className="mb-6">
               <span className="text-[11px] font-bold tracking-wider uppercase text-[var(--text-subtle)] block mb-2">
                 Select Operating System:
               </span>
               <div className="grid grid-cols-3 gap-2">
-                {/* Windows Tab */}
                 <button
                   type="button"
                   onClick={() => setSelectedOS("windows")}
@@ -179,7 +181,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                   <span className="text-[10px] text-[var(--text-subtle)]">10 / 11 (64-bit)</span>
                 </button>
 
-                {/* macOS Tab */}
                 <button
                   type="button"
                   onClick={() => setSelectedOS("macos")}
@@ -199,7 +200,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                   <span className="text-[10px] text-[var(--text-subtle)]">M1/M2/M3 &amp; Intel</span>
                 </button>
 
-                {/* Linux Tab */}
                 <button
                   type="button"
                   onClick={() => setSelectedOS("linux")}
@@ -221,9 +221,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
               </div>
             </div>
 
-            {/* Content Based on OS Selection */}
             {selectedOS === "windows" ? (
-              /* Windows Download Card */
               <div className="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] mb-6">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div>
@@ -255,13 +253,12 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                       <span>Download initiated! Check your browser downloads bar.</span>
                     </div>
 
-                    {/* Windows SmartScreen Quick Tip */}
                     <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-[var(--text-muted)] flex items-start gap-2.5">
                       <ShieldCheck size={16} className="text-[var(--primary)] shrink-0 mt-0.5" />
                       <div>
                         <span className="font-bold text-[var(--text-main)] block mb-0.5">Windows SmartScreen Note:</span>
                         <span>
-                          If Windows shows <em>&ldquo;Protected your PC / Unrecognized app&rdquo;</em>, click <strong className="text-[var(--text-main)]">&ldquo;More info&rdquo;</strong> ➔ <strong className="text-[var(--primary)]">&ldquo;Run anyway&rdquo;</strong>. The installer is 100% virus-free and verified by Yubisaki Assistive Technology.
+                          If Windows shows <em>&ldquo;Protected your PC / Unrecognized app&rdquo;</em>, click <strong className="text-[var(--text-main)]">&ldquo;More info&rdquo;</strong> ➔ <strong className="text-[var(--text-main)]">&ldquo;Run anyway&rdquo;</strong>.
                         </span>
                       </div>
                     </div>
@@ -269,7 +266,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                 )}
               </div>
             ) : (
-              /* macOS & Linux Coming Soon Card */
               <div className="p-5 rounded-2xl bg-[var(--bg-subtle)] border border-[var(--border)] mb-6">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
@@ -280,12 +276,11 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                   {selectedOS === "macos" ? "macOS Build (Apple Silicon & Intel)" : "Linux Build (.deb / AppImage)"} is on the way!
                 </h4>
                 <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                  The {selectedOS === "macos" ? "macOS" : "Linux"} native client is currently undergoing final beta testing. Leave your email below to receive the direct download link and early VIP access as soon as it goes live.
+                  The {selectedOS === "macos" ? "macOS" : "Linux"} native client is currently undergoing final beta testing. Leave your email below to receive the direct download link and early access information.
                 </p>
               </div>
             )}
 
-            {/* 3 Step Setup Guide */}
             <div className="space-y-2 mb-6">
               <p className="text-[11px] font-bold tracking-wider uppercase text-[var(--text-subtle)]">
                 Instant 3-Step Setup
@@ -306,14 +301,14 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
               </div>
             </div>
 
-            {/* Email Notification Capture */}
             <div className="pt-4 border-t border-[var(--border)]">
               <h5 className="text-xs font-bold text-[var(--text-main)] mb-1">
                 Subscribe for regular updates &amp; new AI agent features
               </h5>
               <p className="text-[11px] text-[var(--text-muted)] mb-3">
-                Get early release notes, weekly platform additions, and priority notification for {selectedOS === "windows" ? "new feature drops" : `${selectedOS === "macos" ? "macOS" : "Linux"} launch`}.
+                Get early release notes, weekly platform additions, and priority notification for {selectedOS === "windows" ? "new feature drops" : `${selectedOS === "macos" ? "macOS" : "Linux"} builds`}.
               </p>
+
               {submitted ? (
                 <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs leading-relaxed space-y-1">
                   <div className="flex items-center gap-2 font-bold text-sm">
@@ -336,7 +331,7 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
                         placeholder="Enter your email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full pl-10 pr-3 py-2.5 bg-[var(--bg-card)] border border-[var(--border)] rounded-xl text-xs text-[var(--text-main)] placeholder-[var(--text-subtle)] focus:outline-none focus:border-[var(--primary)] disabled:opacity-50"
+                        className="w-full pl-10 pr-3 py-2.5 bg-[var(--bg-card)] border border-[var(--border)] rounded-xl text-xs text-[var(--text-main)] placeholder-[var(--text-subtle)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
                       />
                     </div>
                     <button
@@ -368,7 +363,6 @@ export default function DownloadModal({ isOpen, onClose }: DownloadModalProps) {
               )}
             </div>
 
-            {/* Security note */}
             <div className="mt-5 flex items-center justify-center gap-2 text-[11px] text-[var(--text-subtle)]">
               <Shield size={13} className="text-emerald-500" />
               <span>Clean binary • Verified by Yubisaki Assistive Technology • 100% Virus-free</span>
