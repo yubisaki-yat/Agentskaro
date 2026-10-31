@@ -19,6 +19,10 @@ import LiveSocialToast from "@/components/LiveSocialToast";
 import { Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const DOWNLOAD_FILE_NAME = "AgentsKaro.Setup.3.5.0.exe";
+const DEFAULT_EXE_URL =
+  "https://github.com/yubisaki-yat/Agentskaro/releases/latest/download/AgentsKaro.Setup.3.5.0.exe";
+
 export default function Home() {
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [showStickyCTA, setShowStickyCTA] = useState(false);
@@ -33,13 +37,13 @@ export default function Home() {
   }, []);
 
   const openDownload = () => {
-    // Trigger direct .exe download instantly — zero gates, zero required fields
-    const exeUrl =
-      process.env.NEXT_PUBLIC_EXE_URL ||
-      "https://github.com/yubisaki-yat/Agentskaro/releases/download/v3.1.0/AgentsKaro.Setup.3.1.0.exe";
+    // Use the actual latest release asset. Fallback to the GitHub latest-download URL
+    // to avoid broken direct links when the tag and asset versions drift.
+    const exeUrl = process.env.NEXT_PUBLIC_EXE_URL || DEFAULT_EXE_URL;
     const link = document.createElement("a");
     link.href = exeUrl;
-    link.setAttribute("download", "AgentsKaro.Setup.3.1.0.exe");
+    link.setAttribute("download", DOWNLOAD_FILE_NAME);
+    link.rel = "noopener noreferrer";
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -104,7 +108,7 @@ export default function Home() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 80, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-lg surface-card rounded-2xl p-3 sm:p-4 flex items-center justify-between gap-4 shadow-2xl border border-[var(--border)]"
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-lg surface-card rounded-2xl p-3 sm:p-4 flex items-center justify-between gap-4 shadow-2xl border border-[var(--border)] bg-[var(--bg-card)]/95 backdrop-blur-md"
           >
             <div className="flex items-center gap-3 pl-1">
               <div className="relative">
@@ -120,7 +124,7 @@ export default function Home() {
               </div>
               <div className="hidden sm:block">
                 <div className="text-xs font-bold text-[var(--text-main)] leading-none" style={{ fontFamily: "var(--font-display)" }}>
-                  AgentsKaro Desktop v3.1.0
+                  AgentsKaro Desktop v3.5.0
                 </div>
                 <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold mt-0.5">
                   10 Free Applications Included
